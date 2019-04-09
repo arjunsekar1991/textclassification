@@ -2,14 +2,15 @@
 processing the special format used by the Cranfield Dataset
 '''
 from doc import Document
-
+import os
 
 class NewsGroup:
     def __init__(self, filename):
         self.docs = []
 
         newsGroupFile = open(filename)
-        docid = filename
+        head, tail = os.path.split(filename)
+        docid = tail
         subject = ''
         message = ''
         startread = False
@@ -18,7 +19,7 @@ class NewsGroup:
 #            print (line)
 
             if 'Subject:' in line:
-                subject = line # got title
+                subject = line[9:] # got title
             elif 'Lines:' in line:
                 startread = True
                 line=''
@@ -34,5 +35,7 @@ if __name__ == '__main__':
 
     newsGroupFile = NewsGroup ('C:\\Users\\arjun\\Documents\\Github\\textclassifier\\textclassification\\mini_newsgroups\\alt.atheism\\51121')
     for doc in newsGroupFile.docs:
-        print(doc.docID, doc.subject, doc.message)
+        print(doc.docID)
+        print(doc.subject)
+        print(doc.message)
     print(len(newsGroupFile.docs))
