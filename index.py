@@ -193,11 +193,11 @@ class InvertedIndex:
         #            del iindex.items[line.strip()]
         # Do something with 'line'
         stop_words = set(stopwords.words('english'))
-        print(len(iindex.items))
+     #   print(len(iindex.items))
         for terms in list(iindex.items.keys()):
             #        print(terms)
             if terms in stop_words:
-                print("key delete works")
+              #  print("key delete works")
                 del iindex.items[terms]
         for terms in iindex.items:
     #        print(terms)
