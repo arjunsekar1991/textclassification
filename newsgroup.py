@@ -41,11 +41,12 @@ if __name__ == '__main__':
     for path, subdirs, files in os.walk(cwd):
         for name in files:
            # if fnmatch(name, pattern):
-            print(os.path.join(path, name))
+           # print(os.path.join(path, name))
             dataFileslist.append(os.path.join(path, name))
     newsGroupFile = NewsGroup (dataFileslist)
    # for doc in newsGroupFile.docs:
-    #    print(doc.docID)
-     #   print(doc.subject)
-      #  print(doc.message)
+   #     print(doc.docID)
+   #     print(doc.subject)
+   #     print(doc.message)
     print(len(newsGroupFile.docs))
+    #21884
