@@ -9,6 +9,15 @@ from fnmatch import fnmatch
 class NewsGroup:
     def __init__(self, files):
         self.docs = []
+        self.class1items1 = []
+        self.class1items2 = []
+        self.class1items3 = []
+        self.class1items4 = []
+        self.class1items5 = []
+        self.class1items6 = []
+        #find class id based on document number
+        self.classDocumentLookup ={}
+
         for filename in files:
             newsGroupFile = open(filename)
             head, tail = os.path.split(filename)
@@ -32,6 +41,54 @@ class NewsGroup:
             message=buf;
             self.docs.append(Document(docid, subject, message)) # the last one
 
+            if filename.find("comp.graphics") != -1:
+                self.class1items1.append(docid)
+            if filename.find("comp.os.ms-windows.misc") != -1:
+                self.class1items1.append(docid)
+            if filename.find("comp.sys.ibm.pc.hardware") != -1:
+                self.class1items1.append(docid)
+            if filename.find("comp.sys.mac.hardware") != -1:
+                self.class1items1.append(docid)
+            if filename.find("comp.windows.x") != -1:
+                self.class1items1.append(docid)
+
+            if filename.find("rec.autos") != -1:
+                self.class1items2.append(docid)
+            if filename.find("rec.motorcycles") != -1:
+                self.class1items2.append(docid)
+            if filename.find("rec.sport.baseball") != -1:
+                self.class1items2.append(docid)
+            if filename.find("rec.sport.hockey") != -1:
+                self.class1items2.append(docid)
+
+            if filename.find("sci.crypt") != -1:
+                self.class1items3.append(docid)
+            if filename.find("sci.electronics") != -1:
+                self.class1items3.append(docid)
+            if filename.find("sci.med") != -1:
+                self.class1items3.append(docid)
+            if filename.find("sci.space") != -1:
+                self.class1items3.append(docid)
+
+            if filename.find("misc.forsale") != -1:
+                self.class1items4.append(docid)
+
+            if filename.find("talk.politics.misc") != -1:
+                self.class1items5.append(docid)
+            if filename.find("talk.politics.guns") != -1:
+                self.class1items5.append(docid)
+            if filename.find("talk.politics.mideast") != -1:
+                self.class1items5.append(docid)
+
+            if filename.find("talk.religion.misc") != -1:
+                self.class1items6.append(docid)
+            if filename.find("alt.atheism") != -1:
+                self.class1items6.append(docid)
+            if filename.find("soc.religion.christian") != -1:
+                self.class1items6.append(docid)
+
+
+
 if __name__ == '__main__':
     ''' testing '''
     cwd = os.getcwd()+"\\mini_newsgroups"
@@ -49,4 +106,11 @@ if __name__ == '__main__':
    #     print(doc.subject)
    #     print(doc.message)
     print(len(newsGroupFile.docs))
+    print(len(newsGroupFile.class1items1))
+    print(len(newsGroupFile.class1items2))
+    print(len(newsGroupFile.class1items3))
+    print(len(newsGroupFile.class1items4))
+    print(len(newsGroupFile.class1items5))
+    print(len(newsGroupFile.class1items6))
+
     #21884

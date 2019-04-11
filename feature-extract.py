@@ -14,7 +14,8 @@ class FeatureExtraction:
             formattedData = str(counter) + " " + x + "\n"
             f.write(formattedData)
         f.close()
-
+        if typeOFFeature ==0:
+            print ('start')
 
 
 if __name__ == '__main__':
