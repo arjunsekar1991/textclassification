@@ -49,7 +49,7 @@ class IndexItem:
         self.term = term
         self.posting = {}  # postings are stored in a python dict for easier index building
         self.idf = 0
-        self.tf = 0
+        #self.tf = 0
         #self.sorted_posting s= [] # may sort them by docID for easier query processing
 
     def add(self, docid, pos):
@@ -156,10 +156,10 @@ class InvertedIndex:
         rawvalue = self.nDocs/(len(list(self.items[term].posting.keys())))
         self.items[term].idf = math.log(rawvalue,10)
 
-    def tf(self, term):
-        for x in self.items[term].posting:
-            self.items[term].tf = self.items[term].tf +self.items[term].posting[x].termfreq
-        self.items[term].tf = self.items[term].tf /len(self.items[term].posting)
+ #   def tf(self, term):
+ #       for x in self.items[term].posting:
+ #           self.items[term].tf = self.items[term].tf +self.items[term].posting[x].termfreq
+ #       self.items[term].tf = self.items[term].tf /len(self.items[term].posting)
 
     # more methods if needed
 
@@ -202,9 +202,9 @@ class InvertedIndex:
         for terms in iindex.items:
     #        print(terms)
             iindex.idf(terms)
-        for terms in iindex.items:
+      #  for terms in iindex.items:
             #        print(terms)
-            iindex.tf(terms)
+        #   iindex.tf(terms)
 
         # iindex.save(indexfilename)
         print(len(iindex.items))
@@ -218,6 +218,6 @@ if __name__ == '__main__':
    # indexingCranfield((str(sys.argv[1]), str(sys.argv[2]))
     ii = InvertedIndex()
     ii.indexingCranfield('mini_newsgroups')
-
+    print ('test')
 #idf log(number of documents/total number of documents term occurs)
 # number of times the term occurs in particular document
