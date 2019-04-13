@@ -78,37 +78,20 @@ class InvertedIndex:
         # (1) convert to lower cases,
         # (2) remove stopwords,
         # (3) stemming
-        # after applying step1  there are 12236 items
-        # after applying step3  there are 9666 items
-        # after applying step2  there are 9567 items
+
         self.nDocs = self.nDocs + 1;
         titletoken = word_tokenize(doc.subject)
         bodytoken = word_tokenize(doc.message)
-#        titletoken = re.split(" ", doc.title.replace('\n', ' '))
-#        titletoken = ' '.join(titletoken).split()
-#        bodytoken = re.split(" ", doc.body.replace('\n', ' '))
-#        bodytoken = ' '.join(bodytoken).split()
         tokens = titletoken + bodytoken
         tokens = [element.lower() for element in tokens];
 
         stop_words = set(stopwords.words('english'))
-       # for i in tokens :
-      #      if i in stop_words:
-
-  #              print("key delete works")
-     #           tokens.remove(i)
         k = 0
         positionindoc = 1
         while k < len(tokens):
 
                 tempindexitem = IndexItem(tokens[k])
-
-                #
-
-                #stemming comes here
                 ps = PorterStemmer()
-             #   punctuation = "()/\\"
-             #   tokens[k] = "".join([ch for ch in tokens[k] if ch not in punctuation])
                 stemmedToken = ps.stem(tokens[k])
 
                 if (stemmedToken in self.items ):
@@ -119,7 +102,6 @@ class InvertedIndex:
                     self.items[stemmedToken] = tempindexitem
 
                 positionindoc = positionindoc + len(tokens[k]) + 1;
-
                 k = k + 1
 
     def sort(self):
@@ -156,14 +138,6 @@ class InvertedIndex:
         rawvalue = self.nDocs/(len(list(self.items[term].posting.keys())))
         self.items[term].idf = math.log(rawvalue,10)
 
- #   def tf(self, term):
- #       for x in self.items[term].posting:
- #           self.items[term].tf = self.items[term].tf +self.items[term].posting[x].termfreq
- #       self.items[term].tf = self.items[term].tf /len(self.items[term].posting)
-
-    # more methods if needed
-
-
     def test(self):
         ''' test your code thoroughly. put the testing cases here'''
         print('Pass')
@@ -174,7 +148,7 @@ class InvertedIndex:
         # command line usage: "python index.py cran.all index_file"
         # the index is saved to index_file
         cwd = os.getcwd() + "\\"+collectionDir
-        # print(glob.glob(cwd+"/mini_newsgroups/*.FILE"))
+
         dataFileslist = []
 
         for path, subdirs, files in os.walk(cwd):
@@ -186,29 +160,14 @@ class InvertedIndex:
         iindex = InvertedIndex()
         for doc in newsGroupFile.docs:
             iindex.indexDoc(doc)
-        # doing  stop word removal here ?
-        #with open("stopwords") as f:
-        #    for line in f:
-        #        if line.strip() in iindex.items:
-        #            del iindex.items[line.strip()]
-        # Do something with 'line'
         stop_words = set(stopwords.words('english'))
-     #   print(len(iindex.items))
         for terms in list(iindex.items.keys()):
-            #        print(terms)
             if terms in stop_words:
-              #  print("key delete works")
                 del iindex.items[terms]
         for terms in iindex.items:
-    #        print(terms)
             iindex.idf(terms)
-      #  for terms in iindex.items:
-            #        print(terms)
-        #   iindex.tf(terms)
 
-        # iindex.save(indexfilename)
         print(len(iindex.items))
-        print("Index builded successfully")
         return iindex
 
 #42673
@@ -216,8 +175,8 @@ class InvertedIndex:
 if __name__ == '__main__':
     # test()
    # indexingCranfield((str(sys.argv[1]), str(sys.argv[2]))
-    ii = InvertedIndex()
-    ii.indexingCranfield('mini_newsgroups')
-    print ('test')
+    invIndexObj = InvertedIndex()
+    invIndexObj.indexingCranfield('mini_newsgroups')
+
 #idf log(number of documents/total number of documents term occurs)
 # number of times the term occurs in particular document

@@ -32,14 +32,26 @@ class FeatureExtraction:
         f.close()
 
         #as per the proejct requirement hardcoding the class files here and outputting
-        classDefinitiontuple = ("1 comp.graphics", "1 comp.os.ms-windows.misc", "1 comp.sys.ibm.pc.hardware", "1 comp.sys.mac.hardware", "1 comp.windows.x"
-                                     "2 rec.autos", "2 rec.motorcycles", "2 rec.sport.baseball", "2 rec.sport.hockey"
-                                     "3 sci.crypt", "3 sci.electronics", "3 sci.med", "3 sci.space",
-                                     "4 misc.forsale",
-                                     "5 talk.politics.misc","5 talk.politics.guns", "5 talk.politics.mideast"
-                                     "6 talk.religion.misc","6 alt.atheism", "6 soc.religion.christian"
-
-                                     )
+        classDefinitiontuple=("1 comp.graphics",
+                              "1 comp.os.ms-windows.misc",
+                              "1 comp.sys.ibm.pc.hardware",
+                              "1 comp.sys.mac.hardware",
+                              "1 comp.windows.x"
+                              "2 rec.autos",
+                              "2 rec.motorcycles",
+                              "2 rec.sport.baseball",
+                              "2 rec.sport.hockey"
+                              "3 sci.crypt",
+                              "3 sci.electronics",
+                              "3 sci.med",
+                              "3 sci.space",
+                              "4 misc.forsale",
+                              "5 talk.politics.misc",
+                              "5 talk.politics.guns",
+                              "5 talk.politics.mideast"
+                              "6 talk.religion.misc",
+                              "6 alt.atheism",
+                              "6 soc.religion.christian")
 
         classfile = open(classDefinitionFile, "w")
         for x in classDefinitiontuple:
