@@ -106,13 +106,7 @@ class NewsGroup:
             if filename.find("soc.religion.christian") != -1:
                 self.class1items6.append(docid)
                 self.classDocumentLookup.setdefault('6', []).append(docid)
-           # self.classDocumentLookup.setdefault('1', []).append('apple')
-           # self.classDocumentLookup[1] = self.class1items1
-            #self.classDocumentLookup[2] = self.class1items2
-          #  self.classDocumentLookup[3] = self.class1items3
-            #self.classDocumentLookup[4] = self.class1items4
-           # self.classDocumentLookup[5] = self.class1items5
-            #self.classDocumentLookup[6] = self.class1items6
+
 
 
 
