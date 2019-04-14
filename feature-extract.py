@@ -63,7 +63,8 @@ class FeatureExtraction:
 
         print('tf start')
         libsvmtf = {}
-
+        if os.path.exists("training_data_file.TF"):
+            os.remove("training_data_file.TF")
         newsgroup = self.getNewsGroupFile(directoryOfNewsgroup)
 
 
@@ -109,6 +110,8 @@ class FeatureExtraction:
 
         print('idf start')
         libsvmidf = {}
+        if os.path.exists("training_data_file.IDF"):
+            os.remove("training_data_file.IDF")
         newsgroup = self.getNewsGroupFile(directoryOfNewsgroup)
 
         for x in invertedIndex.items.keys():
@@ -146,7 +149,7 @@ class FeatureExtraction:
 
             #     saved_column = df.column_name  # you can also use df['column_name']
             idfdata = str(classid) + " " + str(''.join(str(libsvmidf[x]).split(",")))[1:-1] + "\n"
-            print(idfdata)
+           # print(idfdata)
             libsvmidffile.write(idfdata)
         libsvmidffile.close()
 
@@ -154,6 +157,8 @@ class FeatureExtraction:
 
         print('TF-idf start')
         libsvmtfidf = {}
+        if os.path.exists("training_data_file.TFIDF"):
+            os.remove("training_data_file.TFIDF")
         newsgroup = self.getNewsGroupFile(directoryOfNewsgroup)
 
         for x in invertedIndex.items.keys():
@@ -191,7 +196,7 @@ class FeatureExtraction:
 
             #     saved_column = df.column_name  # you can also use df['column_name']
             tfidfdata = str(classid) + " " + str(''.join(str(libsvmtfidf[x]).split(",")))[1:-1] + "\n"
-            print(tfidfdata)
+           # print(tfidfdata)
             libsvmtfidffile.write(tfidfdata)
         libsvmtfidffile.close()
 
