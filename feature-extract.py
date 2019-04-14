@@ -1,6 +1,6 @@
 from index import InvertedIndex
 import os
-
+import string
 from newsgroup import NewsGroup
 class FeatureExtraction:
     def __new__(cls):  # __new__ is an implicit classmethod
@@ -73,8 +73,9 @@ class FeatureExtraction:
             for postingobject in invertedIndex.items.get(x).posting.keys():
                 #libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
                 libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID,[]).append(self.getKeysByValue(self.termIdLookup,x))
+                libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(':')
                 #libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
-                libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID,[]).append(invertedIndex.items.get(x).posting.get(postingobject).termfreq)
+                libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID,[]).append(round(invertedIndex.items.get(x).posting.get(postingobject).termfreq,5))
                # libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
 
         for x in libsvmtf:
@@ -101,8 +102,11 @@ class FeatureExtraction:
          #               columns[k].append(v)  # append the value into the appropriate list
 
             #     saved_column = df.column_name  # you can also use df['column_name']
+
+            #print (str(tempstr).split("'",""))
             tfdata = str(classid) + " " + str(''.join(str(libsvmtf[x]).split(",")))[1:-1] + "\n"
-           # print (tfdata)
+            tfdata = str.replace(tfdata, " ':' ", ":")
+            print (tfdata)
             libsvmtffile.write(tfdata)
         libsvmtffile.close()
 
@@ -120,6 +124,7 @@ class FeatureExtraction:
                 # libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
                 libsvmidf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(
                     self.getKeysByValue(self.termIdLookup, x))
+                libsvmidf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(':')
                 # libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
                 libsvmidf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(
                     invertedIndex.items.get(x).idf)
@@ -149,6 +154,7 @@ class FeatureExtraction:
 
             #     saved_column = df.column_name  # you can also use df['column_name']
             idfdata = str(classid) + " " + str(''.join(str(libsvmidf[x]).split(",")))[1:-1] + "\n"
+            idfdata = str.replace(idfdata, " ':' ", ":")
            # print(idfdata)
             libsvmidffile.write(idfdata)
         libsvmidffile.close()
@@ -167,6 +173,7 @@ class FeatureExtraction:
                 # libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
                 libsvmtfidf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(
                     self.getKeysByValue(self.termIdLookup, x))
+                libsvmtfidf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(':')
                 # libsvmtf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append('\t')
                 libsvmtfidf.setdefault(invertedIndex.items.get(x).posting.get(postingobject).docID, []).append(
                     invertedIndex.items.get(x).posting.get(postingobject).termfreq*invertedIndex.items.get(x).idf)
@@ -196,6 +203,7 @@ class FeatureExtraction:
 
             #     saved_column = df.column_name  # you can also use df['column_name']
             tfidfdata = str(classid) + " " + str(''.join(str(libsvmtfidf[x]).split(",")))[1:-1] + "\n"
+            tfidfdata = str.replace(tfidfdata, " ':' ", ":")
            # print(tfidfdata)
             libsvmtfidffile.write(tfidfdata)
         libsvmtfidffile.close()
