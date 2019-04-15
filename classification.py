@@ -2,8 +2,7 @@ from sklearn.datasets import load_svmlight_file
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import cross_val_score
-import numpy as np
-from sklearn.neighbors  import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 
 
