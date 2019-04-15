@@ -21,7 +21,7 @@ class FeatureExtraction:
         newsGroupFile = NewsGroup(dataFileslist)
         return newsGroupFile
 
-    def extractfeature( self,directoryOfNewsgroup, featureDefinitionFile,classDefinitionFile,trainingDataFile,typeOFFeature):
+    def extractfeature( self,directoryOfNewsgroup, featureDefinitionFile,classDefinitionFile,trainingDataFile):
         iindexObject = InvertedIndex()
         invertedIndex = iindexObject.indexingCranfield(directoryOfNewsgroup)
         f = open(featureDefinitionFile, "w")
@@ -216,5 +216,5 @@ class FeatureExtraction:
 
 if __name__ == '__main__':
     fxtraction = FeatureExtraction()
-    fxtraction.extractfeature('mini_newsgroups','feature_definition_file','class_definition_file','training_data_file',0)
+    fxtraction.extractfeature('mini_newsgroups','feature_definition_file','class_definition_file','training_data_file')
 
