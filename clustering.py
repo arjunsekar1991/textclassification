@@ -14,33 +14,57 @@ kMeansMutualInformation = []
 agglomerativeClusteringSilhoutte = []
 agglomerativeClusteringMutualInformation = []
 
-
-topThousandFeatures = SelectKBest(mutual_info_classif, k=1000).fit_transform(feature_vectors3, targets3)
-topThousandFeatures = topThousandFeatures.toarray()
+topHundredFeatures = SelectKBest(mutual_info_classif, k=100).fit_transform(feature_vectors3, targets3)
+topHundredFeatures = topHundredFeatures.toarray()
 
 for i in numberOfClusters:
-    kmeans_model = KMeans(n_clusters=i).fit(topThousandFeatures)
+
+    kmeans_model = KMeans(n_clusters=i).fit(topHundredFeatures)
     clustering_labels = kmeans_model.labels_
-    silhouettescore = metrics.silhouette_score(topThousandFeatures, clustering_labels, metric='euclidean')
-    mutualInformationscore = metrics.normalized_mutual_info_score(topThousandFeatures, clustering_labels)
+    silhouettescore = metrics.silhouette_score(topHundredFeatures, clustering_labels, metric='euclidean')
+    mutualInformationscore = metrics.normalized_mutual_info_score(targets3, clustering_labels)
     kMeansSilhouette.append(silhouettescore)
     kMeansMutualInformation.append(mutualInformationscore)
 
 #for i in numberOfClusters:
-    single_linkage_model = AgglomerativeClustering(n_clusters=i, linkage='ward').fit(topThousandFeatures)
+    single_linkage_model = AgglomerativeClustering(n_clusters=i, linkage='ward').fit(topHundredFeatures)
     clustering_labels2 = single_linkage_model.labels_
-    silhouettescore2 = metrics.silhouette_score(topThousandFeatures, clustering_labels2, metric='euclidean')
-    mutualInformationscore2 = metrics.normalized_mutual_info_score(topThousandFeatures, clustering_labels2)
+    silhouettescore2 = metrics.silhouette_score(topHundredFeatures, clustering_labels2, metric='euclidean')
+    mutualInformationscore2 = metrics.normalized_mutual_info_score(targets3, clustering_labels2)
     agglomerativeClusteringSilhoutte.append(silhouettescore2)
     agglomerativeClusteringMutualInformation.append(mutualInformationscore2)
 
 # share x for sharing the number of clusters across all the scores
-figure, axis = pyplot.subplots(4, sharex = True)
-figure.suptitle('KMeansSilhouetteScore, kMeansMutualInformation, AgglomerativeLinkageSilhouetteScore (Ward), AgglomerativeLinkageMutualInformation (Ward)')
-pyplot.xlabel('Number Of Clusters')
-pyplot.ylabel('Silhouette & Mutual Information')
-axis[0].plot(numberOfClusters, kMeansSilhouette)
-axis[1].plot(numberOfClusters, kMeansMutualInformation)
-axis[2].plot(numberOfClusters, agglomerativeClusteringSilhoutte)
-axis[3].plot(numberOfClusters, agglomerativeClusteringMutualInformation)
+#figure, axis = pyplot.subplots(4, sharex = True)
+#figure.suptitle('KMeansSilhouetteScore, kMeansMutualInformation, AgglomerativeLinkageSilhouetteScore (Ward), AgglomerativeLinkageMutualInformation (Ward)')
+#pyplot.xlabel('Number Of Clusters')
+#pyplot.ylabel('Silhouette & Mutual Information')
+#axis[0].plot(numberOfClusters, kMeansSilhouette)
+#axis[1].plot(numberOfClusters, kMeansMutualInformation)
+#axis[2].plot(numberOfClusters, agglomerativeClusteringSilhoutte)
+#axis[3].plot(numberOfClusters, agglomerativeClusteringMutualInformation)
+#pyplot.show()
+
+pyplot.figure(figsize=(9,9))
+pyplot.plot(numberOfClusters, kMeansSilhouette)
+pyplot.xlabel("Number of Clusters")
+pyplot.ylabel("KMeansSilhouette Score")
+pyplot.show()
+
+pyplot.figure(figsize=(9,9))
+pyplot.plot(numberOfClusters, kMeansMutualInformation)
+pyplot.xlabel("Number of Clusters")
+pyplot.ylabel("KMeansMutualInformation Score")
+pyplot.show()
+
+pyplot.figure(figsize=(9,9))
+pyplot.plot(numberOfClusters, agglomerativeClusteringSilhoutte)
+pyplot.xlabel("Number of Clusters")
+pyplot.ylabel("AgglomerativeClusteringSilhoutte Score")
+pyplot.show()
+
+pyplot.figure(figsize=(9,9))
+pyplot.plot(numberOfClusters, agglomerativeClusteringMutualInformation)
+pyplot.xlabel("Number of Clusters")
+pyplot.ylabel("AgglomerativeClusteringMutualInformation Score")
 pyplot.show()
