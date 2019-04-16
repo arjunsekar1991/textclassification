@@ -1,6 +1,7 @@
 from index import InvertedIndex
 import os
 import string
+import sys
 from newsgroup import NewsGroup
 class FeatureExtraction:
     def __new__(cls):  # __new__ is an implicit classmethod
@@ -61,10 +62,10 @@ class FeatureExtraction:
         classfile.close()
         #end of hardcoded class files
 
-        print('tf start')
+     #   print('tf start')
         libsvmtf = {}
-        if os.path.exists("training_data_file.TF"):
-            os.remove("training_data_file.TF")
+        if os.path.exists(trainingDataFile+".TF"):
+            os.remove(trainingDataFile+".TF")
         newsgroup = self.getNewsGroupFile(directoryOfNewsgroup)
 
 
@@ -80,7 +81,7 @@ class FeatureExtraction:
 
         for x in libsvmtf:
             tfdata =''
-            libsvmtffile = open("training_data_file.TF", "a")
+            libsvmtffile = open(trainingDataFile+".TF", "a")
             if x in newsgroup.class1items1:
                 classid = 1
             if x in newsgroup.class1items2:
@@ -106,16 +107,16 @@ class FeatureExtraction:
             #print (str(tempstr).split("'",""))
             tfdata = str(classid) + " " + str(''.join(str(libsvmtf[x]).split(",")))[1:-1] + "\n"
             tfdata = str.replace(tfdata, " ':' ", ":")
-            print (tfdata)
+       #     print (tfdata)
             libsvmtffile.write(tfdata)
         libsvmtffile.close()
 
-        print('tf complete')
+      #  print('tf complete')
 
-        print('idf start')
+    #    print('idf start')
         libsvmidf = {}
-        if os.path.exists("training_data_file.IDF"):
-            os.remove("training_data_file.IDF")
+        if os.path.exists(trainingDataFile+".IDF"):
+            os.remove(trainingDataFile+".IDF")
         newsgroup = self.getNewsGroupFile(directoryOfNewsgroup)
 
         for x in invertedIndex.items.keys():
@@ -132,7 +133,7 @@ class FeatureExtraction:
 
         for x in libsvmidf:
             idfdata = ''
-            libsvmidffile = open("training_data_file.IDF", "a")
+            libsvmidffile = open(trainingDataFile+".IDF", "a")
             if x in newsgroup.class1items1:
                 classid = 1
             if x in newsgroup.class1items2:
@@ -159,12 +160,12 @@ class FeatureExtraction:
             libsvmidffile.write(idfdata)
         libsvmidffile.close()
 
-        print('idf complete')
+     #   print('idf complete')
 
-        print('TF-idf start')
+      #  print('TF-idf start')
         libsvmtfidf = {}
-        if os.path.exists("training_data_file.TFIDF"):
-            os.remove("training_data_file.TFIDF")
+        if os.path.exists(trainingDataFile+".TFIDF"):
+            os.remove(trainingDataFile+".TFIDF")
         newsgroup = self.getNewsGroupFile(directoryOfNewsgroup)
 
         for x in invertedIndex.items.keys():
@@ -181,7 +182,7 @@ class FeatureExtraction:
 
         for x in libsvmtfidf:
             tfidfdata = ''
-            libsvmtfidffile = open("training_data_file.TFIDF", "a")
+            libsvmtfidffile = open(trainingDataFile+".TFIDF", "a")
             if x in newsgroup.class1items1:
                 classid = 1
             if x in newsgroup.class1items2:
@@ -208,7 +209,7 @@ class FeatureExtraction:
             libsvmtfidffile.write(tfidfdata)
         libsvmtfidffile.close()
 
-        print('TF-idf complete')
+       # print('TF-idf complete')
 
 #training_data_file.TF, training_data_file.IDF, and training_data_file.TFIDF
 
@@ -216,5 +217,5 @@ class FeatureExtraction:
 
 if __name__ == '__main__':
     fxtraction = FeatureExtraction()
-    fxtraction.extractfeature('mini_newsgroups','feature_definition_file','class_definition_file','training_data_file')
-
+    fxtraction.extractfeature(str(sys.argv[1]),str(sys.argv[2]),str(sys.argv[3]),str(sys.argv[4]))
+    #fxtraction.extractfeature('mini_newsgroups','feature_definition_file','class_definition_file','training_data_file')

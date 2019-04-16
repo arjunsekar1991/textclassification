@@ -10,9 +10,10 @@ import matplotlib.pyplot as pyplot
 feature_vectors1, targets1 = load_svmlight_file("training_data_file.TF")
 feature_vectors2, targets2 = load_svmlight_file("training_data_file.IDF")
 feature_vectors3, targets3 = load_svmlight_file("training_data_file.TFIDF")
-
+import warnings
+warnings.filterwarnings('ignore')
 kvalue = [500, 1500, 2500, 3500, 4500, 5500, 6500, 8500,10000]
-
+print ("Please wait while the values are computed:")
 multinomialnbf1scores = []
 bernoullinbf1scores = []
 svcf1scores = []
@@ -31,7 +32,7 @@ for i in kvalue:
     bernoullinbf1scores.append(f1.mean())
 
 for i in kvalue:
-    cls3 = SVC()
+    cls3 = SVC(gamma='auto')
     X_new1 = SelectKBest(chi2, k=i).fit_transform(feature_vectors3, targets3)
     f1 = cross_val_score(cls3, X_new1, targets3, cv=5, scoring='f1_macro')
     svcf1scores.append(f1.mean())
@@ -54,7 +55,7 @@ pyplot.legend(loc = 'best')
 pyplot.show()
 
 
-
+print ("Please wait while the values are computed This will take more time than previous one :")
 kvalue = [100, 300, 500, 700, 900, 1100]
 
 multinomialnbmif1scores = []
@@ -75,7 +76,7 @@ for i in kvalue:
     bernoullinbmif1scores.append(f1.mean())
 
 for i in kvalue:
-    cls3 = SVC()
+    cls3 = SVC(gamma='auto')
     X_new1 = SelectKBest(mutual_info_classif, k=i).fit_transform(feature_vectors3, targets3)
     f1 = cross_val_score(cls3, X_new1, targets3, cv=5, scoring='f1_macro')
     svcmif1scores.append(f1.mean())

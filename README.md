@@ -1,1 +1,2 @@
 
+python feature-extract.py mini_newsgroups feature_definition_file class_definition_file training_data_file

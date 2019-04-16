@@ -5,7 +5,10 @@ from sklearn.cluster import KMeans, AgglomerativeClustering
 import matplotlib.pyplot as pyplot
 from sklearn.feature_selection import chi2, mutual_info_classif
 from sklearn.feature_selection import SelectKBest
+import warnings
+warnings.filterwarnings('ignore')
 
+print ("Please wait while the values are computed:")
 feature_vectors3, targets3 = load_svmlight_file("training_data_file.TFIDF")
 numberOfClusters = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 
