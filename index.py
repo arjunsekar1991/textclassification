@@ -167,7 +167,7 @@ class InvertedIndex:
         for terms in iindex.items:
             iindex.idf(terms)
 
-      #  print(len(iindex.items))
+        print(len(iindex.items))
         return iindex
 
 #42673

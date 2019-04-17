@@ -17,7 +17,7 @@ class NewsGroup:
         self.class1items6 = []
         #find class id based on document number
         self.classDocumentLookup ={}
-
+        # this part will handle document with duplicate names
         for filename in files:
             newsGroupFile = open(filename)
             head, tail = os.path.split(filename)
@@ -61,21 +61,41 @@ class NewsGroup:
                 docid = tail + "alt.atheism"
             if head.find("soc.religion.christian")!= -1:
                 docid = tail + "soc.religion.christian"
-
-
-
+            totalNumberofLines = 0
+            with open(filename) as f:
+                for i, l in enumerate(f):
+                    pass
+                totalNumberofLines = i + 1
+            #print (totalNumberofLines)
             subject = ''
             message = ''
             startread = False
             buf = ''
+            linecounter = 0
+            numOfLinesToRead = 0
             for line in newsGroupFile:
-    #            print (line)
+                #print (line)
 
-                if 'Subject:' in line:
+                linecounter = linecounter+1
+                if 'Subject:' ==str(line[0:8]):
                     subject = line[9:] # got title
-                elif 'Lines:' in line:
-                    startread = True
-                    line=''
+                if 'Lines:'==str(line[0:6]):
+                   # print (line[7])
+                    if line[8]=='\n':
+                       # print (filename)
+                        numOfLinesToRead = int(line[7:8])
+                    else:
+                        if line[9]=='\n':
+                            numOfLinesToRead = int(line[7:9])
+                        else:
+                            if line[7:10].isdigit():
+                                numOfLinesToRead = int(line[7:10])
+                            else:
+                                startread = True
+                if numOfLinesToRead != 0:
+                    if linecounter == totalNumberofLines-numOfLinesToRead+1:
+                        #print(linecounter)
+                        startread = True
                 if startread:
                       buf += line
 

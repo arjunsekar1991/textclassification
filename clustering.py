@@ -71,3 +71,5 @@ pyplot.plot(numberOfClusters, agglomerativeClusteringMutualInformation)
 pyplot.xlabel("Number of Clusters")
 pyplot.ylabel("Agglomerative Clustering Mutual Information Score (Normalized)")
 pyplot.show()
+
+print("---Plot graph finish---")
