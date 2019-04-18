@@ -37,57 +37,22 @@ for i in numberOfClusters:
     agglomerativeClusteringSilhoutte.append(silhouettescore2)
     agglomerativeClusteringMutualInformation.append(mutualInformationscore2)
 
-# share x for sharing the number of clusters across all the scores
-#figure, axis = pyplot.subplots(4, sharex = True)
-#figure.suptitle('KMeansSilhouetteScore, kMeansMutualInformation, AgglomerativeLinkageSilhouetteScore (Ward), AgglomerativeLinkageMutualInformation (Ward)')
-#pyplot.xlabel('Number Of Clusters')
-#pyplot.ylabel('Silhouette & Mutual Information')
-#axis[0].plot(numberOfClusters, kMeansSilhouette)
-#axis[1].plot(numberOfClusters, kMeansMutualInformation)
-#axis[2].plot(numberOfClusters, agglomerativeClusteringSilhoutte)
-#axis[3].plot(numberOfClusters, agglomerativeClusteringMutualInformation)
-#pyplot.show()
-
-#pyplot.figure(figsize=(9,9))
-#pyplot.plot(numberOfClusters, kMeansSilhouette)
-#pyplot.xlabel("Number of Clusters")
-#pyplot.ylabel("KMeans Silhouette Score")
-#pyplot.show()
-
-#pyplot.figure(figsize=(9,9))
-#pyplot.plot(numberOfClusters, kMeansMutualInformation)
-#pyplot.xlabel("Number of Clusters")
-#pyplot.ylabel("KMeans Mutual Information Score (Normalized)")
-#pyplot.show()
-
-#pyplot.figure(figsize=(9,9))
-#pyplot.plot(numberOfClusters, agglomerativeClusteringSilhoutte)
-#pyplot.xlabel("Number of Clusters")
-#pyplot.ylabel("Agglomerative Clustering Silhoutte Score")
-#pyplot.show()
-
-#pyplot.figure(figsize=(9,9))
-#pyplot.plot(numberOfClusters, agglomerativeClusteringMutualInformation)
-#pyplot.xlabel("Number of Clusters")
-#pyplot.ylabel("Agglomerative Clustering Mutual Information Score (Normalized)")
-#pyplot.show()
-
 
 
 pyplot.figure(figsize=(9,9))
 pyplot.plot(numberOfClusters, kMeansSilhouette, label = "k-Means Silhouette Score")
-pyplot.plot(numberOfClusters, kMeansMutualInformation, label = "k-Means MutualInformation Score")
+pyplot.plot(numberOfClusters, agglomerativeClusteringSilhoutte, label = "Agglomerative Clustering Silhouette Score")
 pyplot.xlabel("Number Of Clusters")
-pyplot.ylabel("K-Means Clustering scores")
+pyplot.ylabel("K-Means & Agglomerative Clustering Silhouette scores")
 pyplot.legend(loc = 'best')
 pyplot.show()
 
 
 pyplot.figure(figsize=(9,9))
-pyplot.plot(numberOfClusters, agglomerativeClusteringSilhoutte, label = "Agglomerative Clustering Silhoutte Score")
+pyplot.plot(numberOfClusters, kMeansMutualInformation, label = "k-Means MutualInformation Score")
 pyplot.plot(numberOfClusters, agglomerativeClusteringMutualInformation, label = "Agglomerative Clustering MutualInformation Score")
 pyplot.xlabel("Number Of Clusters")
-pyplot.ylabel("Agglomerative Clustering Scores")
+pyplot.ylabel("K-Means & Agglomerative Clustering MutualInformation Scores")
 pyplot.legend(loc = 'best')
 pyplot.show()
 
