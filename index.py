@@ -147,7 +147,7 @@ class InvertedIndex:
         # ToDo: indexing the Cranfield dataset and save the index to a file
         # command line usage: "python index.py cran.all index_file"
         # the index is saved to index_file
-        cwd = os.getcwd() + "\\"+collectionDir
+        cwd = collectionDir
 
         dataFileslist = []
 

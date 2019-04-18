@@ -13,7 +13,7 @@ class FeatureExtraction:
         #listOfKeys = list()
         return dictOfElements[valueToFind]
     def getNewsGroupFile(self,collectionDir):
-        cwd = os.getcwd() + "\\" + collectionDir
+        cwd = collectionDir
         dataFileslist = []
 
         for path, subdirs, files in os.walk(cwd):
@@ -224,7 +224,7 @@ def test():
     try:
         #statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        trainingDatafileTf = open("training_data_file.TF")
+        trainingDatafileTf = open(str(sys.argv[4])+".TF")
         linecounter = 0
         for line in trainingDatafileTf:
             # print (line)
@@ -241,7 +241,7 @@ def test():
     try:
         # statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        trainingDatafileidf = open("training_data_file.IDF")
+        trainingDatafileidf = open(str(sys.argv[4])+".IDF")
         linecounter = 0
         for line in trainingDatafileidf:
             # print (line)
@@ -258,7 +258,7 @@ def test():
     try:
         # statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        trainingDatafileTfIDF = open("training_data_file.TFIDF")
+        trainingDatafileTfIDF = open(str(sys.argv[4])+".TFIDF")
         linecounter = 0
         for line in trainingDatafileTfIDF:
             # print (line)
@@ -276,7 +276,7 @@ def test():
     try:
         #statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        trainingDatafileTf = open("training_data_file.TF")
+        trainingDatafileTf = open(str(sys.argv[4])+".TF")
         linecounter = 0
         for line in trainingDatafileTf:
             # print (line)
@@ -296,7 +296,7 @@ def test():
     try:
         # statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        trainingDatafileIDF = open("training_data_file.IDF")
+        trainingDatafileIDF = open(str(sys.argv[4])+".IDF")
         linecounter = 0
         for line in trainingDatafileIDF:
             # print (line)
@@ -316,7 +316,7 @@ def test():
     try:
         # statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        trainingDatafileTfIDF = open("training_data_file.TFIDF")
+        trainingDatafileTfIDF = open(str(sys.argv[4])+".TFIDF")
         linecounter = 0
         for line in trainingDatafileTfIDF:
             # print (line)
@@ -335,7 +335,7 @@ def test():
 
     try:
         iindexObject = InvertedIndex()
-        invertedIndex = iindexObject.indexingCranfield("mini_newsgroups")
+        invertedIndex = iindexObject.indexingCranfield(str(sys.argv[1]))
         if invertedIndex.nDocs == 2000:
             print("Inverted index is correct")
         else:
@@ -347,7 +347,7 @@ def test():
     try:
         # statinfo = os.stat("trainingDataFile.TF")
         # here we are compaing the file should have
-        classDefinitionFile = open("class_definition_file")
+        classDefinitionFile = open(str(sys.argv[3]))
         linecounter = 0
         for line in classDefinitionFile:
             # print (line)
